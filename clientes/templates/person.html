@@ -2,17 +2,41 @@
 {% block title %} Administração {% endblock %}
 
 {% block main%}
-<p>Olar {{user.username}}</p>
-<a href="{% url 'logout' %}">Sair</a>
-    
-<ul>
-    {%for person in persons%}
-        <li>
-            <a href="{% url 'person_update' person.id %}"> {{person.first_name}}</a>
-            <a href="{% url 'person_delete' person.id %}" class="btn btn-danger"> Deletar</a>
-        </li>
+    <div class="row">
+        <div class="col">
 
-    {%endfor%}
-</ul>
-<a href="{% url 'person_new'%}" class="btn btn-primary">Novo Cadastro</a>
+        </div>
+
+        <div class="col-6">
+            <h3>Listagem de Clientes</h3>
+            <ul class="list-group">
+                {%for person in persons%}
+                    <li class="list-group-item">
+                        <a href="{% url 'person_update' person.id %}"> {{person.first_name}}</a>
+                        <a href="{% url 'person_delete' person.id %}" class="trash-item">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+                    </li>
+            
+                {%endfor%}
+            </ul>
+            <br>
+            <a href="{% url 'person_new'%}" class="btn btn-primary">Novo Cadastro</a>
+        </div>
+
+        <div class="col">
+            {% if user.is_authenticated %}
+            <p>Olar {{user.username}} <a href="{% url 'logout' %}"><span class="badge badge-dark"> Sair </span></a></p>
+            
+            {%endif%}
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+        <span class="text-muted">Desenvolvimento Web 2.x</span>
+        </div>
+    </footer>
 {% endblock %}

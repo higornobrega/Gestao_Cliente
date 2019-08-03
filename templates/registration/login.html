@@ -1,11 +1,21 @@
 {% extends 'base.html' %}
+{% load bootstrap %}
+{% load static %}
 {% block title %} Página de Login {% endblock %}
 
 {% block main%}
     <h2>Login</h2>
     <form method="POST">
         {% csrf_token %}
-        {{form.as_p}}
+        {{form|bootstrap}}
         <button type="submit" class="btn btn-info">Salvar</button>
     </form>
+{% endblock %}
+
+{% block footer %}
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+        <span class="text-muted">Desenvolvimento Web 2.x</span>
+        </div>
+    </footer>
 {% endblock %}
